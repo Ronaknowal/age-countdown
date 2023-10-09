@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Age</title>
+    <style>
+        #age-container {
+          margin: auto;
+          margin-top: 20%;
+            text-align: center;
+            font-size: 24px; 
+        }
+
+        #age {
+          font-family: "Roboto Slab", Helvetica, Arial, sans-serif;
+            font-size: 36px;
+            position: relative;
+            top: -10px; 
+          font-weight: bold;
+        }
+
+        #decimal {
+          font-family: "Roboto Slab", Helvetica, Arial, sans-serif;
+            font-size: 16px; 
+            position: relative;
+            top: -20px; 
+          font-weight: bold;
+        }
+      #age-string{
+        font-size: 16px;
+            position: relative;
+            top: 7px;
+        right: 3%;
+      }
+    </style>
+</head>
+<body>
+    <div id="age-container">
+        <p id='age-string'>AGE</p>
+        <span id="age"></span><span id="decimal"></span>
+    </div>
+
+    <script>
+        function calculateAge() {
+            const dob = new Date("2002-08-13"); //Date of Birth
+            const currentDate = new Date();
+
+            const ageInMilliseconds = currentDate - dob;
+            const ageInYears = ageInMilliseconds / (1000 * 60 * 60 * 24 * 365.25);
+
+            // Split the age into integer and decimal parts
+            const ageParts = ageInYears.toFixed(9).toString().split('.');
+            const integerPart = ageParts[0];
+            const decimalPart = ageParts[1] || '000000000';
+
+            document.getElementById("age").textContent = integerPart;
+            document.getElementById("decimal").textContent = '.' + decimalPart;
+        }
+
+        // Initially calculate age
+        calculateAge();
+
+        // Update age every 100 milliseconds
+        setInterval(calculateAge, 100);
+    </script>
+</body>
+</html>
